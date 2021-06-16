@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gereasy.Data.Migrations
 {
     [DbContext(typeof(GereasyDbContext))]
-    [Migration("20210616145726_AlteracoesApres")]
-    partial class AlteracoesApres
+    [Migration("20210616154611_fxCiclo")]
+    partial class fxCiclo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -193,7 +193,7 @@ namespace Gereasy.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TarefaFK")
+                    b.Property<int?>("TarefaFK")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -456,9 +456,7 @@ namespace Gereasy.Data.Migrations
 
                     b.HasOne("Gereasy.Models.Tarefas", "Tarefa")
                         .WithMany("ListaDeColaboradoresAtribuidos")
-                        .HasForeignKey("TarefaFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TarefaFK");
 
                     b.Navigation("Colaborador");
 

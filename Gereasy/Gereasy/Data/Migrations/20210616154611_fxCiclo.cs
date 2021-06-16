@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gereasy.Data.Migrations
 {
-    public partial class AlteracoesApres : Migration
+    public partial class fxCiclo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -122,7 +122,7 @@ namespace Gereasy.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Funcao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ColaboradorFK = table.Column<int>(type: "int", nullable: false),
-                    TarefaFK = table.Column<int>(type: "int", nullable: false)
+                    TarefaFK = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -138,7 +138,7 @@ namespace Gereasy.Data.Migrations
                         column: x => x.TarefaFK,
                         principalTable: "Tarefas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

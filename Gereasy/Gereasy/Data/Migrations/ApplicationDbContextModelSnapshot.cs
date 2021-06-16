@@ -191,7 +191,7 @@ namespace Gereasy.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TarefaFK")
+                    b.Property<int?>("TarefaFK")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -454,9 +454,7 @@ namespace Gereasy.Data.Migrations
 
                     b.HasOne("Gereasy.Models.Tarefas", "Tarefa")
                         .WithMany("ListaDeColaboradoresAtribuidos")
-                        .HasForeignKey("TarefaFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TarefaFK");
 
                     b.Navigation("Colaborador");
 

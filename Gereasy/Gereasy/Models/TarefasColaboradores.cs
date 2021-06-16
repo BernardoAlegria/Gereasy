@@ -41,7 +41,8 @@ namespace Gereasy.Models {
         /// <summary>
         /// FK para o Tarefa        /// </summary>
         [ForeignKey(nameof(Tarefa))]
-        public int TarefaFK { get; set; }
+        //int? é um workaround para o erro do ciclo https://entityframeworkcore.com/knowledge-base/52268985/may-cause-cycles-or-multiple-cascade-paths--specify-on-delete-no-action-or-on-update-no-action--or-modify-other-foreign-key-constraints
+        public int? TarefaFK { get; set; }
         public Tarefas Tarefa { get; set; }
     }
 }
