@@ -40,11 +40,13 @@ namespace Gereasy.Models {
         /// <summary>
         /// Data de criação do Projeto
         /// </summary>
+        [Required(ErrorMessage = "A Data de Criação é de preenchimento obrigatório")] 
         public DateTime DataCriacao { get; set; }
 
         /// <summary>
         /// Data prevista para a conclusão do projeto
         /// </summary>
+        [Required(ErrorMessage = "A Data Prevista é de preenchimento obrigatório")] 
         public TimeSpan DataPrevista { get; set; }
 
         /// <summary>

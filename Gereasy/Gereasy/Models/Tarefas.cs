@@ -23,6 +23,8 @@ namespace Gereasy.Models {
         /// <summary>
         /// Título da tarefa
         /// </summary>
+        [Required(ErrorMessage = "O Título é de preenchimento obrigatório")]
+        [StringLength(50, ErrorMessage = "O {0} não pode ter mais de {1} caracteres.")]
         public string Titulo { get; set; }
 
         /// <summary>
@@ -33,27 +35,31 @@ namespace Gereasy.Models {
         /// <summary>
         /// Data de criação da Tarefa
         /// </summary>
+        [Required(ErrorMessage = "A Data de Criação é de preenchimento obrigatório")] 
         public DateTime DataCriacao { get; set; }
 
         /// <summary>
         /// Data limite de conclusão da tarefa
         /// </summary>
+        [Required(ErrorMessage = "A Data Limite é de preenchimento obrigatório")]
         public DateTime DataLimite { get; set; }
 
         /// <summary>
         /// Estado de conclusão do projeto. Pendente, em curso, por testar, concluido, aguarda ação externa, cancelado.
+        /// Ao ser criada uma tarefa, é automáticamente considerada "Pendente"
         /// </summary>
         public string Estado { get; set; }
 
         /// <summary>
         /// Nível de prioridade atribuído à tarefa. Baixa, média ou alta
         /// </summary>
+        [Required(ErrorMessage = "A Prioridade é de preenchimento obrigatório")]
         public string Prioridade { get; set; }
 
         /// <summary>
         /// Quantidade de tempo despendido pelos colaboradores nesta tarefa 
         /// </summary>
-        public TimeSpan TempoDedicado { get; set; }
+        public TimeSpan TempoDedicadoTotal { get; set; }
 
         //**********************************************
 

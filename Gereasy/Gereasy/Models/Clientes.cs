@@ -34,16 +34,21 @@ namespace Gereasy.Models {
         /// <summary>
         /// Descricao e informação variada acerca do cliente
         /// </summary>
+        [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
         /// <summary>
         /// Endereço de email para entrar em contacto com o cliente
         /// </summary>
+        [Required(ErrorMessage = "O Email é de preenchimento obrigatório")]
+        [EmailAddress(ErrorMessage = "o {0} introduzido não é válido")]
         public string Email { get; set; }
 
         /// <summary>
         /// Contacto telefónico para entrar em contacto com o cliente
         /// </summary>
+        [StringLength(16, MinimumLength = 9, ErrorMessage = "O {0} deve estar compreendido entre {1} e {2} caracteres...")]
+        [RegularExpression("(00)?[0-9]{9,14}", ErrorMessage = "O {0} só aceita algarismos.")]
         public string Contacto { get; set; }
 
 

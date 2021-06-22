@@ -42,20 +42,21 @@ namespace Gereasy.Models {
         /// <summary>
         /// Data de nascimento do Colaborador
         /// </summary>
+        [Display(Name = "Data Nascimento")]
         public DateTime DataNasc { get; set; }
 
         /// <summary>
         /// Cargo do colaborador
         /// </summary>
         [Required(ErrorMessage = "O Cargo é de preenchimento obrigatório")]
-        [StringLength(20, ErrorMessage = "O {0} não pode ter mais de {1} caracteres.")]
+        [StringLength(30, ErrorMessage = "O {0} não pode ter mais de {1} caracteres.")]
         public string Cargo { get; set; }
 
         /// <summary>
         /// Departamento ao qual o colaborador pertence
         /// </summary>
         [Required(ErrorMessage = "O Departamento é de preenchimento obrigatório")]
-        [StringLength(25, ErrorMessage = "O {0} não pode ter mais de {1} caracteres.")]
+        [StringLength(30, ErrorMessage = "O {0} não pode ter mais de {1} caracteres.")]
         public string Departamento { get; set; }
 
         /// <summary>
@@ -70,7 +71,7 @@ namespace Gereasy.Models {
         /// </summary>
         [Required(ErrorMessage = "O Contacto é de preenchimento obrigatório")]
         [StringLength(14, MinimumLength = 8, ErrorMessage = "O {0} deve ter entre {1} e {2} caracteres.")]
-        //expr regular para so numeros
+        [RegularExpression("(00)?[0-9]{9,14}", ErrorMessage = "O {0} só aceita algarismos.")]
         public string Contacto { get; set; }
 
         /// <summary>

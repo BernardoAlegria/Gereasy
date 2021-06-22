@@ -26,10 +26,13 @@ namespace Gereasy.Models {
         /// Função atribuida ao Colaborador. Esta função pode ser de Revisor ou de Implementador
         /// </summary>
         [Required(ErrorMessage = "A função é de preenchimento obrigatório")]
+        [Display(Name = "Função")]
         public string Funcao { get; set; }
 
-        //adicionar tempo dedicado
-        //*****************************************************************************************
+        /// <summary>
+        /// Quantidade de tempo despendido pelo colaborador a esta tarefa 
+        /// </summary>
+        public TimeSpan TempoDedicado { get; set; }
 
         /// <summary>
         /// FK para o Colaborador
