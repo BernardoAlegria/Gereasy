@@ -58,8 +58,10 @@ namespace Gereasy.Models {
 
         /// <summary>
         /// Quantidade de tempo despendido pelos colaboradores nesta tarefa. Apenas para a base de dados, para operações utilizar o atributo "TempoDedicadoTimeSpan"
-        /// Não pode ser do tipo TimeSpan. No SQL Server é criado um atributo do tipo "date(7)" que apenas suporta até 24h, o TimeSpan pode ter dias.
-        /// No nosso caso precisamos dos dias, por isso vamos guardar o tempo em "ticks" com a ajuda do atributo "TempoDedicadoTimeSpan". 
+        /// Não pode ser do tipo TimeSpan. No SQL Server é criado um atributo do tipo "time(7)" que apenas suporta até 24h, o TimeSpan pode ter dias.
+        /// No nosso caso precisamos dos dias, por isso vamos guardar o tempo em "ticks" com a ajuda do atributo "TempoDedicadoTimeSpan".
+        /// https://docs.microsoft.com/en-us/dotnet/api/system.timespan.ticks?view=net-5.0#remarks
+        /// https://docs.microsoft.com/en-us/sql/t-sql/data-types/time-transact-sql?view=sql-server-ver15
         /// </summary>
         public long TempoDedicadoTotal { get; set; }
 
