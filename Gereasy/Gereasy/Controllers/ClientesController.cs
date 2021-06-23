@@ -12,17 +12,18 @@ namespace Gereasy.Controllers
 {
     public class ClientesController : Controller
     {
-        private readonly GereasyDbContext _context;
+        // Referência à Base de dados
+        private readonly GereasyDbContext _db;
 
         public ClientesController(GereasyDbContext context)
         {
-            _context = context;
+            _db = context;
         }
 
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clientes.ToListAsync());
+            return View(await _db.Clientes.ToListAsync());
         }
 
         // GET: Clientes/Details/5
@@ -33,7 +34,7 @@ namespace Gereasy.Controllers
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes
+            var clientes = await _db.Clientes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (clientes == null)
             {
@@ -58,8 +59,8 @@ namespace Gereasy.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clientes);
-                await _context.SaveChangesAsync();
+                _db.Add(clientes);
+                await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(clientes);
@@ -73,7 +74,7 @@ namespace Gereasy.Controllers
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes.FindAsync(id);
+            var clientes = await _db.Clientes.FindAsync(id);
             if (clientes == null)
             {
                 return NotFound();
@@ -97,8 +98,8 @@ namespace Gereasy.Controllers
             {
                 try
                 {
-                    _context.Update(clientes);
-                    await _context.SaveChangesAsync();
+                    _db.Update(clientes);
+                    await _db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,7 +125,7 @@ namespace Gereasy.Controllers
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes
+            var clientes = await _db.Clientes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (clientes == null)
             {
@@ -139,15 +140,15 @@ namespace Gereasy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clientes = await _context.Clientes.FindAsync(id);
-            _context.Clientes.Remove(clientes);
-            await _context.SaveChangesAsync();
+            var clientes = await _db.Clientes.FindAsync(id);
+            _db.Clientes.Remove(clientes);
+            await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClientesExists(int id)
         {
-            return _context.Clientes.Any(e => e.Id == id);
+            return _db.Clientes.Any(e => e.Id == id);
         }
     }
 }
