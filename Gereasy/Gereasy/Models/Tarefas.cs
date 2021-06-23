@@ -35,7 +35,7 @@ namespace Gereasy.Models {
         /// <summary>
         /// Data de criação da Tarefa
         /// </summary>
-        [Required(ErrorMessage = "A Data de Criação é de preenchimento obrigatório")] 
+        [Required(ErrorMessage = "A Data de Criação é de preenchimento obrigatório")]
         public DateTime DataCriacao { get; set; }
 
         /// <summary>
@@ -57,9 +57,24 @@ namespace Gereasy.Models {
         public string Prioridade { get; set; }
 
         /// <summary>
-        /// Quantidade de tempo despendido pelos colaboradores nesta tarefa 
+        /// Quantidade de tempo despendido pelos colaboradores nesta tarefa. Apenas para a base de dados, para operações utilizar o atributo "TempoDedicadoTimeSpan"
+        /// Não pode ser do tipo TimeSpan. No SQL Server é criado um atributo do tipo "date(7)" que apenas suporta até 24h, o TimeSpan pode ter dias.
+        /// No nosso caso precisamos dos dias, por isso vamos guardar o tempo em "ticks" com a ajuda do atributo "TempoDedicadoTimeSpan". 
         /// </summary>
-        public TimeSpan TempoDedicadoTotal { get; set; }
+        public long TempoDedicadoTotal { get; set; }
+
+        /// <summary>
+        /// Atributo auxiliar para resolver o problema do atributo TempoDedicadoTotal.
+        /// </summary>
+        [NotMapped]
+        public TimeSpan TempoDedicadoTimeSpan {
+            // Caso seja preciso o atributo, devolve um objeto TimeSpan criado a partir do numero de ticks
+            get { return TimeSpan.FromTicks(TempoDedicadoTotal); }
+            // Caso seja necessário alterar, o TimeSpan é alterado para ticks e altera-se o atributo TempoDedicadoTotal
+            set { TempoDedicadoTotal = value.Ticks; }
+        }
+
+
 
         //**********************************************
 
@@ -67,8 +82,15 @@ namespace Gereasy.Models {
         /// FK para o Projecto ao qual a Tarefa pertence
         /// </summary>
         [ForeignKey(nameof(Projeto))]
-        public int ProjetoFK { get; set; }
+        public int? ProjetoFK { get; set; }
         public Projetos Projeto { get; set; }
+
+        /// <summary>
+        /// FK para o Colaborador que criou a tarefa
+        /// </summary>
+        [ForeignKey(nameof(Colaborador))]
+        public int ColaboradorFK { get; set; }
+        public Colaboradores Colaborador { get; set; }
 
         /// <summary>
         /// Lista de Colaboradores Associados a esta tarefa

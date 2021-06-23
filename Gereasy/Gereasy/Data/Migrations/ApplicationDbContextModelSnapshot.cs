@@ -16,7 +16,7 @@ namespace Gereasy.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Gereasy.Models.Clientes", b =>
@@ -118,6 +118,96 @@ namespace Gereasy.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Colaboradores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cargo = "Gestor",
+                            Contacto = "9111111111",
+                            DataNasc = new DateTime(1990, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Departamento = "Gestão",
+                            Email = "PatriciaContente@empresa.com",
+                            Foto = "PatriciaContente.jpg",
+                            Nome = "Patrícia Contente"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cargo = "Gestor",
+                            Contacto = "9111111112",
+                            DataNasc = new DateTime(1994, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Departamento = "Administração",
+                            Email = "BeatrizBonito@empresa.com",
+                            Foto = "BeatrizBonito.jpg",
+                            Nome = "Beatriz Bonito"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Cargo = "Gestor",
+                            Contacto = "9111111113",
+                            DataNasc = new DateTime(1996, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Departamento = "Gestão",
+                            Email = "PauloPereira@empresa.com",
+                            Foto = "PauloPereira.jpg",
+                            Nome = "Paulo Pereira"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Cargo = "Gestor",
+                            Contacto = "9111111114",
+                            DataNasc = new DateTime(1995, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Departamento = "Gestão",
+                            Email = "VadimsZinatulins@empresa.com",
+                            Foto = "VadimsZinatulins.jpg",
+                            Nome = "Vadims Zinatulins"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Cargo = "Técnico",
+                            Contacto = "9111111115",
+                            DataNasc = new DateTime(1996, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Departamento = "Informática",
+                            Email = "ZeMaria@empresa.com",
+                            Foto = "ZeMaria.jpg",
+                            Nome = "Zé Maria"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Cargo = "Técnico",
+                            Contacto = "9111111116",
+                            DataNasc = new DateTime(1996, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Departamento = "Informática",
+                            Email = "Marisa Vieira@empresa.com",
+                            Foto = "MarisaVieira.jpg",
+                            Nome = "Marisa Vieira"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Cargo = "Técnico",
+                            Contacto = "9111111117",
+                            DataNasc = new DateTime(1992, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Departamento = "Informática",
+                            Email = "PaulaSilva@empresa.com",
+                            Foto = "PaulaSilva.jpg",
+                            Nome = "Paula Silva"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Cargo = "Técnico",
+                            Contacto = "9111111118",
+                            DataNasc = new DateTime(1993, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Departamento = "Informática",
+                            Email = "MarcoRocha@empresa.com",
+                            Foto = "MarcoRocha.jpg",
+                            Nome = "Marco Rocha"
+                        });
                 });
 
             modelBuilder.Entity("Gereasy.Models.Projetos", b =>
@@ -166,7 +256,7 @@ namespace Gereasy.Data.Migrations
                         {
                             Id = 1,
                             ClienteFK = 1,
-                            CriadorFK = 999999999,
+                            CriadorFK = 1,
                             DataCriacao = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataFim = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataInicio = new DateTime(2022, 6, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -178,7 +268,7 @@ namespace Gereasy.Data.Migrations
                         {
                             Id = 2,
                             ClienteFK = 1,
-                            CriadorFK = 999999999,
+                            CriadorFK = 2,
                             DataCriacao = new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataFim = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataInicio = new DateTime(2022, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -190,7 +280,7 @@ namespace Gereasy.Data.Migrations
                         {
                             Id = 3,
                             ClienteFK = 2,
-                            CriadorFK = 999999999,
+                            CriadorFK = 3,
                             DataCriacao = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataFim = new DateTime(2020, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataInicio = new DateTime(2020, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -202,7 +292,7 @@ namespace Gereasy.Data.Migrations
                         {
                             Id = 4,
                             ClienteFK = 2,
-                            CriadorFK = 999999999,
+                            CriadorFK = 2,
                             DataCriacao = new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataFim = new DateTime(2021, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataInicio = new DateTime(2020, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -214,7 +304,7 @@ namespace Gereasy.Data.Migrations
                         {
                             Id = 5,
                             ClienteFK = 1,
-                            CriadorFK = 999999999,
+                            CriadorFK = 4,
                             DataCriacao = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataFim = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataInicio = new DateTime(2022, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -231,7 +321,7 @@ namespace Gereasy.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ColaboradoresId")
+                    b.Property<int>("ColaboradorFK")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataCriacao")
@@ -250,11 +340,11 @@ namespace Gereasy.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProjetoFK")
+                    b.Property<int?>("ProjetoFK")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("TempoDedicadoTotal")
-                        .HasColumnType("time");
+                    b.Property<long>("TempoDedicadoTotal")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
@@ -263,11 +353,195 @@ namespace Gereasy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ColaboradoresId");
+                    b.HasIndex("ColaboradorFK");
 
                     b.HasIndex("ProjetoFK");
 
                     b.ToTable("Tarefas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ColaboradorFK = 1,
+                            DataCriacao = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2022, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Criar um front-end para apresentar ao cliente",
+                            Estado = "Pendente",
+                            Prioridade = "baixa",
+                            ProjetoFK = 1,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "Front-end"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ColaboradorFK = 1,
+                            DataCriacao = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2022, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Concretizar o modelo acordado com o cliente",
+                            Estado = "Pendente",
+                            Prioridade = "baixa",
+                            ProjetoFK = 1,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "Base de Dados"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ColaboradorFK = 1,
+                            DataCriacao = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Preparar testes unitários para as funções desenvolvidas em back-end",
+                            Estado = "Pendente",
+                            Prioridade = "media",
+                            ProjetoFK = 1,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "Testes Unitários"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ColaboradorFK = 2,
+                            DataCriacao = new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Desenvolver a api para ser consumida por ambas as apps mobile",
+                            Estado = "Pendente",
+                            Prioridade = "media",
+                            ProjetoFK = 2,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "API"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ColaboradorFK = 2,
+                            DataCriacao = new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2022, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Desenvolver a aplicação para dispositivos Android",
+                            Estado = "Pendente",
+                            Prioridade = "baixa",
+                            ProjetoFK = 2,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "App Android"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ColaboradorFK = 2,
+                            DataCriacao = new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2022, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Desenvolver a aplicação para dispositivos IOS",
+                            Estado = "Pendente",
+                            Prioridade = "baixa",
+                            ProjetoFK = 2,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "App IOS"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ColaboradorFK = 3,
+                            DataCriacao = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Criar uma banda sonora para o jogo",
+                            Estado = "concluido",
+                            Prioridade = "alta",
+                            ProjetoFK = 3,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "Banda Sonora"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ColaboradorFK = 3,
+                            DataCriacao = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Desenvolver os assets necessários para os personagens",
+                            Estado = "concluido",
+                            Prioridade = "media",
+                            ProjetoFK = 3,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "Art Assets"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ColaboradorFK = 3,
+                            DataCriacao = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Melhorar mecanismos relacionados com a jogabilidade",
+                            Estado = "concluido",
+                            Prioridade = "baixa",
+                            ProjetoFK = 3,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "Jogabilidade"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ColaboradorFK = 3,
+                            DataCriacao = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Alterar último capítulo",
+                            Estado = "concluido",
+                            Prioridade = "baixa",
+                            ProjetoFK = 3,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "História"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ColaboradorFK = 2,
+                            DataCriacao = new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2020, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Concretizar a base de dados",
+                            Estado = "concluido",
+                            Prioridade = "alta",
+                            ProjetoFK = 4,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "BD"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ColaboradorFK = 2,
+                            DataCriacao = new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Elaborar um mock-up do front-end para apresentar ao cliente",
+                            Estado = "concluido",
+                            Prioridade = "alta",
+                            ProjetoFK = 4,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "Front-end"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ColaboradorFK = 4,
+                            DataCriacao = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2022, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Encontrar uma API que permite obter previsões do tempo",
+                            Estado = "Pendente",
+                            Prioridade = "baixa",
+                            ProjetoFK = 5,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "Api com previsão de tempo"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ColaboradorFK = 4,
+                            DataCriacao = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLimite = new DateTime(2022, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Testar o funcionamento dos regadores adquiridos",
+                            Estado = "Pendente",
+                            Prioridade = "baixa",
+                            ProjetoFK = 5,
+                            TempoDedicadoTotal = 1152000000000L,
+                            Titulo = "Testar regadores IOT"
+                        });
                 });
 
             modelBuilder.Entity("Gereasy.Models.TarefasColaboradores", b =>
@@ -527,15 +801,17 @@ namespace Gereasy.Data.Migrations
 
             modelBuilder.Entity("Gereasy.Models.Tarefas", b =>
                 {
-                    b.HasOne("Gereasy.Models.Colaboradores", null)
+                    b.HasOne("Gereasy.Models.Colaboradores", "Colaborador")
                         .WithMany("ListaDeTarefasCriadas")
-                        .HasForeignKey("ColaboradoresId");
+                        .HasForeignKey("ColaboradorFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Gereasy.Models.Projetos", "Projeto")
                         .WithMany("ListaDeTarefas")
-                        .HasForeignKey("ProjetoFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjetoFK");
+
+                    b.Navigation("Colaborador");
 
                     b.Navigation("Projeto");
                 });
