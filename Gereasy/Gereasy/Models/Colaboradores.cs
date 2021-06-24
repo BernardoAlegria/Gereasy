@@ -46,7 +46,7 @@ namespace Gereasy.Models {
         public DateTime DataNasc { get; set; }
 
         /// <summary>
-        /// Cargo do colaborador
+        /// Cargo do colaborador. gestor ou tecnico
         /// </summary>
         [Required(ErrorMessage = "O Cargo é de preenchimento obrigatório")]
         [StringLength(30, ErrorMessage = "O {0} não pode ter mais de {1} caracteres.")]

@@ -30,9 +30,22 @@ namespace Gereasy.Models {
         public string Funcao { get; set; }
 
         /// <summary>
-        /// Quantidade de tempo despendido pelo colaborador a esta tarefa 
+        /// Quantidade de tempo despendido pelo colaborador a esta tarefa.
+        /// Tem de ser long para guardar o tempo em "ticks". Se não for feito, não é possível mais do que 24h por tarefa.
         /// </summary>
-        public TimeSpan TempoDedicado { get; set; }
+        public long TempoDedicado { get; set; }
+
+        /// <summary>
+        /// Atributo auxiliar para resolver o problema do atributo TempoDedicadoTotal.
+        /// </summary>
+        [NotMapped]
+        public TimeSpan TempoDedicadoTimeSpan {
+            // Caso seja preciso o atributo, devolve um objeto TimeSpan criado a partir do numero de ticks
+            get { return TimeSpan.FromTicks(TempoDedicado); }
+            // Caso seja necessário alterar, o TimeSpan é alterado para ticks e altera-se o atributo TempoDedicadoTotal
+            set { TempoDedicado = value.Ticks; }
+        }
+
 
         /// <summary>
         /// FK para o Colaborador

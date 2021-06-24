@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gereasy.Data.Migrations
 {
-    public partial class TimeSpanFix : Migration
+    public partial class fixTabelaRelacionamento : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -121,7 +121,7 @@ namespace Gereasy.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Funcao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TempoDedicado = table.Column<TimeSpan>(type: "time", nullable: false),
+                    TempoDedicado = table.Column<long>(type: "bigint", nullable: false),
                     ColaboradorFK = table.Column<int>(type: "int", nullable: false),
                     TarefaFK = table.Column<int>(type: "int", nullable: true)
                 },
@@ -157,14 +157,14 @@ namespace Gereasy.Data.Migrations
                 columns: new[] { "Id", "Cargo", "Contacto", "DataNasc", "Departamento", "Email", "Foto", "Nome" },
                 values: new object[,]
                 {
-                    { 1, "Gestor", "9111111111", new DateTime(1990, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gestão", "PatriciaContente@empresa.com", "PatriciaContente.jpg", "Patrícia Contente" },
-                    { 2, "Gestor", "9111111112", new DateTime(1994, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administração", "BeatrizBonito@empresa.com", "BeatrizBonito.jpg", "Beatriz Bonito" },
-                    { 3, "Gestor", "9111111113", new DateTime(1996, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gestão", "PauloPereira@empresa.com", "PauloPereira.jpg", "Paulo Pereira" },
-                    { 4, "Gestor", "9111111114", new DateTime(1995, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gestão", "VadimsZinatulins@empresa.com", "VadimsZinatulins.jpg", "Vadims Zinatulins" },
-                    { 5, "Técnico", "9111111115", new DateTime(1996, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Informática", "ZeMaria@empresa.com", "ZeMaria.jpg", "Zé Maria" },
-                    { 6, "Técnico", "9111111116", new DateTime(1996, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Informática", "Marisa Vieira@empresa.com", "MarisaVieira.jpg", "Marisa Vieira" },
-                    { 7, "Técnico", "9111111117", new DateTime(1992, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Informática", "PaulaSilva@empresa.com", "PaulaSilva.jpg", "Paula Silva" },
-                    { 8, "Técnico", "9111111118", new DateTime(1993, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Informática", "MarcoRocha@empresa.com", "MarcoRocha.jpg", "Marco Rocha" }
+                    { 1, "gestor", "9111111111", new DateTime(1990, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gestão", "PatriciaContente@empresa.com", "PatriciaContente.jpg", "Patrícia Contente" },
+                    { 2, "gestor", "9111111112", new DateTime(1994, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administração", "BeatrizBonito@empresa.com", "BeatrizBonito.jpg", "Beatriz Bonito" },
+                    { 3, "gestor", "9111111113", new DateTime(1996, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gestão", "PauloPereira@empresa.com", "PauloPereira.jpg", "Paulo Pereira" },
+                    { 4, "gestor", "9111111114", new DateTime(1995, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gestão", "VadimsZinatulins@empresa.com", "VadimsZinatulins.jpg", "Vadims Zinatulins" },
+                    { 5, "tecnico", "9111111115", new DateTime(1996, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Informática", "ZeMaria@empresa.com", "ZeMaria.jpg", "Zé Maria" },
+                    { 6, "tecnico", "9111111116", new DateTime(1996, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Informática", "Marisa Vieira@empresa.com", "MarisaVieira.jpg", "Marisa Vieira" },
+                    { 7, "tecnico", "9111111117", new DateTime(1992, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Informática", "PaulaSilva@empresa.com", "PaulaSilva.jpg", "Paula Silva" },
+                    { 8, "tecnico", "9111111118", new DateTime(1993, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Informática", "MarcoRocha@empresa.com", "MarcoRocha.jpg", "Marco Rocha" }
                 });
 
             migrationBuilder.InsertData(
@@ -198,6 +198,20 @@ namespace Gereasy.Data.Migrations
                     { 10, 3, new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Alterar último capítulo", "concluido", "baixa", 3, 1152000000000L, "História" },
                     { 13, 4, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Encontrar uma API que permite obter previsões do tempo", "Pendente", "baixa", 5, 1152000000000L, "Api com previsão de tempo" },
                     { 14, 4, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Testar o funcionamento dos regadores adquiridos", "Pendente", "baixa", 5, 1152000000000L, "Testar regadores IOT" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TarefasColaboradores",
+                columns: new[] { "Id", "ColaboradorFK", "Funcao", "TarefaFK", "TempoDedicado" },
+                values: new object[,]
+                {
+                    { 1, 5, "implementador", 1, 1152000000000L },
+                    { 2, 1, "revisor", 1, 0L },
+                    { 3, 5, "implementador", 2, 1152000000000L },
+                    { 4, 6, "revisor", 2, 0L },
+                    { 5, 5, "implementador", 3, 864000000000L },
+                    { 6, 6, "implementador", 3, 288000000000L },
+                    { 7, 1, "revisor", 3, 0L }
                 });
 
             migrationBuilder.CreateIndex(

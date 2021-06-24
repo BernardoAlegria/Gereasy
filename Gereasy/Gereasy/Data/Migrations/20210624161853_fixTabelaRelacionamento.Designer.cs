@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gereasy.Data.Migrations
 {
     [DbContext(typeof(GereasyDbContext))]
-    [Migration("20210623153926_TimeSpanFix")]
-    partial class TimeSpanFix
+    [Migration("20210624161853_fixTabelaRelacionamento")]
+    partial class fixTabelaRelacionamento
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -125,7 +125,7 @@ namespace Gereasy.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Cargo = "Gestor",
+                            Cargo = "gestor",
                             Contacto = "9111111111",
                             DataNasc = new DateTime(1990, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Departamento = "Gestão",
@@ -136,7 +136,7 @@ namespace Gereasy.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Cargo = "Gestor",
+                            Cargo = "gestor",
                             Contacto = "9111111112",
                             DataNasc = new DateTime(1994, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Departamento = "Administração",
@@ -147,7 +147,7 @@ namespace Gereasy.Data.Migrations
                         new
                         {
                             Id = 3,
-                            Cargo = "Gestor",
+                            Cargo = "gestor",
                             Contacto = "9111111113",
                             DataNasc = new DateTime(1996, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Departamento = "Gestão",
@@ -158,7 +158,7 @@ namespace Gereasy.Data.Migrations
                         new
                         {
                             Id = 4,
-                            Cargo = "Gestor",
+                            Cargo = "gestor",
                             Contacto = "9111111114",
                             DataNasc = new DateTime(1995, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Departamento = "Gestão",
@@ -169,7 +169,7 @@ namespace Gereasy.Data.Migrations
                         new
                         {
                             Id = 5,
-                            Cargo = "Técnico",
+                            Cargo = "tecnico",
                             Contacto = "9111111115",
                             DataNasc = new DateTime(1996, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Departamento = "Informática",
@@ -180,7 +180,7 @@ namespace Gereasy.Data.Migrations
                         new
                         {
                             Id = 6,
-                            Cargo = "Técnico",
+                            Cargo = "tecnico",
                             Contacto = "9111111116",
                             DataNasc = new DateTime(1996, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Departamento = "Informática",
@@ -191,7 +191,7 @@ namespace Gereasy.Data.Migrations
                         new
                         {
                             Id = 7,
-                            Cargo = "Técnico",
+                            Cargo = "tecnico",
                             Contacto = "9111111117",
                             DataNasc = new DateTime(1992, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Departamento = "Informática",
@@ -202,7 +202,7 @@ namespace Gereasy.Data.Migrations
                         new
                         {
                             Id = 8,
-                            Cargo = "Técnico",
+                            Cargo = "tecnico",
                             Contacto = "9111111118",
                             DataNasc = new DateTime(1993, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Departamento = "Informática",
@@ -563,8 +563,8 @@ namespace Gereasy.Data.Migrations
                     b.Property<int?>("TarefaFK")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("TempoDedicado")
-                        .HasColumnType("time");
+                    b.Property<long>("TempoDedicado")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -573,6 +573,64 @@ namespace Gereasy.Data.Migrations
                     b.HasIndex("TarefaFK");
 
                     b.ToTable("TarefasColaboradores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ColaboradorFK = 5,
+                            Funcao = "implementador",
+                            TarefaFK = 1,
+                            TempoDedicado = 1152000000000L
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ColaboradorFK = 1,
+                            Funcao = "revisor",
+                            TarefaFK = 1,
+                            TempoDedicado = 0L
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ColaboradorFK = 5,
+                            Funcao = "implementador",
+                            TarefaFK = 2,
+                            TempoDedicado = 1152000000000L
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ColaboradorFK = 6,
+                            Funcao = "revisor",
+                            TarefaFK = 2,
+                            TempoDedicado = 0L
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ColaboradorFK = 5,
+                            Funcao = "implementador",
+                            TarefaFK = 3,
+                            TempoDedicado = 864000000000L
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ColaboradorFK = 6,
+                            Funcao = "implementador",
+                            TarefaFK = 3,
+                            TempoDedicado = 288000000000L
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ColaboradorFK = 1,
+                            Funcao = "revisor",
+                            TarefaFK = 3,
+                            TempoDedicado = 0L
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

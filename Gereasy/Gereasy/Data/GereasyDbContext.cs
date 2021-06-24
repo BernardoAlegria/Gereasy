@@ -39,14 +39,14 @@ namespace Gereasy.Data {
             // Colaboradores
 
             builder.Entity<Colaboradores>().HasData(
-                new Colaboradores { Id = 1, Nome = "Patrícia Contente", DataNasc = new DateTime(1990, 2, 2), Cargo = "Gestor", Departamento = "Gestão", Email = "PatriciaContente@empresa.com", Contacto = "9111111111", Foto = "PatriciaContente.jpg"},
-                new Colaboradores { Id = 2, Nome = "Beatriz Bonito", DataNasc = new DateTime(1994, 9, 28), Cargo = "Gestor", Departamento = "Administração", Email = "BeatrizBonito@empresa.com", Contacto = "9111111112", Foto = "BeatrizBonito.jpg" },
-                new Colaboradores { Id = 3, Nome = "Paulo Pereira", DataNasc = new DateTime(1996, 6, 16), Cargo = "Gestor", Departamento = "Gestão", Email = "PauloPereira@empresa.com", Contacto = "9111111113", Foto = "PauloPereira.jpg" },
-                new Colaboradores { Id = 4, Nome = "Vadims Zinatulins", DataNasc = new DateTime(1995, 1, 9), Cargo = "Gestor", Departamento = "Gestão", Email = "VadimsZinatulins@empresa.com", Contacto = "9111111114", Foto = "VadimsZinatulins.jpg" },
-                new Colaboradores { Id = 5, Nome = "Zé Maria", DataNasc = new DateTime(1996, 3, 4), Cargo = "Técnico", Departamento = "Informática", Email = "ZeMaria@empresa.com", Contacto = "9111111115", Foto = "ZeMaria.jpg" },
-                new Colaboradores { Id = 6, Nome = "Marisa Vieira", DataNasc = new DateTime(1996, 12, 13), Cargo = "Técnico", Departamento = "Informática", Email = "Marisa Vieira@empresa.com", Contacto = "9111111116", Foto = "MarisaVieira.jpg" },
-                new Colaboradores { Id = 7, Nome = "Paula Silva", DataNasc = new DateTime(1992, 11, 12), Cargo = "Técnico", Departamento = "Informática", Email = "PaulaSilva@empresa.com", Contacto = "9111111117", Foto = "PaulaSilva.jpg" },
-                new Colaboradores { Id = 8, Nome = "Marco Rocha", DataNasc = new DateTime(1993, 1, 30), Cargo = "Técnico", Departamento = "Informática", Email = "MarcoRocha@empresa.com", Contacto = "9111111118", Foto = "MarcoRocha.jpg" }
+                new Colaboradores { Id = 1, Nome = "Patrícia Contente", DataNasc = new DateTime(1990, 2, 2), Cargo = "gestor", Departamento = "Gestão", Email = "PatriciaContente@empresa.com", Contacto = "9111111111", Foto = "PatriciaContente.jpg"},
+                new Colaboradores { Id = 2, Nome = "Beatriz Bonito", DataNasc = new DateTime(1994, 9, 28), Cargo = "gestor", Departamento = "Administração", Email = "BeatrizBonito@empresa.com", Contacto = "9111111112", Foto = "BeatrizBonito.jpg" },
+                new Colaboradores { Id = 3, Nome = "Paulo Pereira", DataNasc = new DateTime(1996, 6, 16), Cargo = "gestor", Departamento = "Gestão", Email = "PauloPereira@empresa.com", Contacto = "9111111113", Foto = "PauloPereira.jpg" },
+                new Colaboradores { Id = 4, Nome = "Vadims Zinatulins", DataNasc = new DateTime(1995, 1, 9), Cargo = "gestor", Departamento = "Gestão", Email = "VadimsZinatulins@empresa.com", Contacto = "9111111114", Foto = "VadimsZinatulins.jpg" },
+                new Colaboradores { Id = 5, Nome = "Zé Maria", DataNasc = new DateTime(1996, 3, 4), Cargo = "tecnico", Departamento = "Informática", Email = "ZeMaria@empresa.com", Contacto = "9111111115", Foto = "ZeMaria.jpg" },
+                new Colaboradores { Id = 6, Nome = "Marisa Vieira", DataNasc = new DateTime(1996, 12, 13), Cargo = "tecnico", Departamento = "Informática", Email = "Marisa Vieira@empresa.com", Contacto = "9111111116", Foto = "MarisaVieira.jpg" },
+                new Colaboradores { Id = 7, Nome = "Paula Silva", DataNasc = new DateTime(1992, 11, 12), Cargo = "tecnico", Departamento = "Informática", Email = "PaulaSilva@empresa.com", Contacto = "9111111117", Foto = "PaulaSilva.jpg" },
+                new Colaboradores { Id = 8, Nome = "Marco Rocha", DataNasc = new DateTime(1993, 1, 30), Cargo = "tecnico", Departamento = "Informática", Email = "MarcoRocha@empresa.com", Contacto = "9111111118", Foto = "MarcoRocha.jpg" }
             );
 
 
@@ -82,6 +82,18 @@ namespace Gereasy.Data {
 
             // Tarefas colaboradores
 
+            builder.Entity<TarefasColaboradores>().HasData(
+                // função: revisor ou implementador
+
+                // projeto 1
+                new TarefasColaboradores { Id = 1, Funcao = "implementador", TempoDedicadoTimeSpan = new TimeSpan(1, 8, 0, 0), ColaboradorFK = 5, TarefaFK = 1 },
+                new TarefasColaboradores { Id = 2, Funcao = "revisor", TempoDedicadoTimeSpan = new TimeSpan(0, 0, 0, 0), ColaboradorFK = 1, TarefaFK = 1 },
+                new TarefasColaboradores { Id = 3, Funcao = "implementador", TempoDedicadoTimeSpan = new TimeSpan(1, 8, 0, 0), ColaboradorFK = 5, TarefaFK = 2 },
+                new TarefasColaboradores { Id = 4, Funcao = "revisor", TempoDedicadoTimeSpan = new TimeSpan(0, 0, 0, 0), ColaboradorFK = 6, TarefaFK = 2 },
+                new TarefasColaboradores { Id = 5, Funcao = "implementador", TempoDedicadoTimeSpan = new TimeSpan(1, 0, 0, 0), ColaboradorFK = 5, TarefaFK = 3 },
+                new TarefasColaboradores { Id = 6, Funcao = "implementador", TempoDedicadoTimeSpan = new TimeSpan(0, 8, 0, 0), ColaboradorFK = 6, TarefaFK = 3 },
+                new TarefasColaboradores { Id = 7, Funcao = "revisor", TempoDedicadoTimeSpan = new TimeSpan(0, 0, 0, 0), ColaboradorFK = 1, TarefaFK = 3 }
+                );
 
         }
 
