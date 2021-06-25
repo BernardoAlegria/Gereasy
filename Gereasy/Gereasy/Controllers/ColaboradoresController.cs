@@ -7,16 +7,34 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gereasy.Data;
 using Gereasy.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Gereasy.Controllers
 {
+
+    /// <summary>
+    /// Controller para gerir os Colaboradores
+    /// </summary>
     public class ColaboradoresController : Controller
     {
+
+        /// <summary>
+        /// Atributo que referencia a base de dados
+        /// </summary>
         private readonly GereasyDbContext _context;
 
-        public ColaboradoresController(GereasyDbContext context)
+        /// <summary>
+        /// Atributo que contém nele os dados do Servidor
+        /// </summary>
+        private readonly IWebHostEnvironment _dadosServidor;
+
+        public ColaboradoresController(GereasyDbContext context, IWebHostEnvironment dadosServidor)
         {
             _context = context;
+            _dadosServidor = dadosServidor;
+
         }
 
         // GET: Colaboradores
@@ -54,15 +72,49 @@ namespace Gereasy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,DataNasc,Cargo,Departamento,Email,Contacto,Foto")] Colaboradores colaboradores)
+        public async Task<IActionResult> Create([Bind("Id,Nome,DataNasc,Cargo,Departamento,Email,Contacto,Foto")] Colaboradores colaborador, IFormFile fotoColaborador)
         {
+
+            colaborador.Foto = "default.jpg";
+
+            // Se existir ficheiro, mudamos o nome da fotografia, senão fica a pre-definida
+            if (fotoColaborador != null) {
+                // a foto está num formato correto?
+                if (fotoColaborador.ContentType == "image/png" || fotoColaborador.ContentType == "image/jpeg") {
+                    // definir o nome do ficheiro e guid para o caso de haver fotos com o mesmo nome
+                    Guid g;
+                    g = Guid.NewGuid();
+                    string nomeFoto = g + "_" + fotoColaborador.FileName;
+                    //adicionar o nome da foto ao colaborador
+                    colaborador.Foto = nomeFoto;
+
+                    // guardar o ficheiro enviado pelo utilizador
+                    // determinar onde guardar o ficheiro
+                    string caminhoAteAoFichFoto = _dadosServidor.WebRootPath;
+                    caminhoAteAoFichFoto = Path.Combine(caminhoAteAoFichFoto, "fotos", colaborador.Foto);
+                    // guardar o ficheiro no Disco Rígido
+                    // TODO try
+                    using var stream = new FileStream(caminhoAteAoFichFoto, FileMode.Create);
+                    await fotoColaborador.CopyToAsync(stream);
+
+                } else {
+                    // ficheiro não válido, retornar à View
+                    ModelState.AddModelError("", "Por favor escolha uma fotografia ou deixe em branco");
+                    return View();
+                }
+            } 
+            // associar o nome da fotografia ao Colaborador
+            
+
+
             if (ModelState.IsValid)
             {
-                _context.Add(colaboradores);
+                _context.Add(colaborador);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(colaboradores);
+            string why = ModelState.ValidationState.ToString();
+            return View(colaborador);
         }
 
         // GET: Colaboradores/Edit/5

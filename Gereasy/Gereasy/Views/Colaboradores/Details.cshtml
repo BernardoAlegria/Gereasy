@@ -50,7 +50,9 @@
             @Html.DisplayNameFor(model => model.Foto)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Foto)
+            <img src="~/fotos/@Model.Foto"
+                 title="@Model.Nome"
+                 height="50" />
         </dd>
     </dl>
 </div>

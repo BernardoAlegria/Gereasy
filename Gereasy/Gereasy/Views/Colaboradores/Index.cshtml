@@ -40,7 +40,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Nome)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataNasc)
@@ -58,7 +58,10 @@
                 @Html.DisplayFor(modelItem => item.Contacto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Foto)
+                @*@Html.DisplayFor(modelItem => item.Foto)*@
+                <img src="~/fotos/@item.Foto"
+                     title="@item.Nome"
+                     height="50" />
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
