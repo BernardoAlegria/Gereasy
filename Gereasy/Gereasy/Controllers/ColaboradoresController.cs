@@ -92,28 +92,40 @@ namespace Gereasy.Controllers
                     // determinar onde guardar o ficheiro
                     string caminhoAteAoFichFoto = _dadosServidor.WebRootPath;
                     caminhoAteAoFichFoto = Path.Combine(caminhoAteAoFichFoto, "fotos", colaborador.Foto);
-                    // guardar o ficheiro no Disco Rígido
-                    // TODO try
-                    using var stream = new FileStream(caminhoAteAoFichFoto, FileMode.Create);
-                    await fotoColaborador.CopyToAsync(stream);
+                    // guardar o ficheiro enviado pelo utilizador
+                    try {
+                        using var stream = new FileStream(caminhoAteAoFichFoto, FileMode.Create);
+                        await fotoColaborador.CopyToAsync(stream);
+                    } catch (Exception) { // existem várias excepções possíveis ao criar um objeto "FileStream" ou a fazer o CopyToAsync
+                        ModelState.AddModelError("", "Ocorreu um erro com a introdução da fotografia.");
+                        return View();
+                    }
+
 
                 } else {
                     // ficheiro não válido, retornar à View
-                    ModelState.AddModelError("", "Por favor escolha uma fotografia ou deixe em branco");
+                    ModelState.AddModelError("", "Por favor escolha uma fotografia válida ou deixe em branco");
                     return View();
                 }
-            } 
-            // associar o nome da fotografia ao Colaborador
+            }
             
 
 
             if (ModelState.IsValid)
             {
-                _context.Add(colaborador);
-                await _context.SaveChangesAsync();
+                //Criar a informação na base de dados pode correr mal e gerar excepções.
+                try {
+                    _context.Add(colaborador);
+                    await _context.SaveChangesAsync();
+
+                } catch(DbUpdateException) { // Erro ao guardar na base de dados
+                    ModelState.AddModelError("", "Ocorreu um erro durante a criação do Colaborador.");
+                    return View();
+                }
+                
+
                 return RedirectToAction(nameof(Index));
             }
-            string why = ModelState.ValidationState.ToString();
             return View(colaborador);
         }
 
