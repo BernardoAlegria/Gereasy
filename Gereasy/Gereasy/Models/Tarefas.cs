@@ -36,12 +36,14 @@ namespace Gereasy.Models {
         /// Data de criação da Tarefa
         /// </summary>
         [Required(ErrorMessage = "A Data de Criação é de preenchimento obrigatório")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataCriacao { get; set; }
 
         /// <summary>
         /// Data limite de conclusão da tarefa
         /// </summary>
         [Required(ErrorMessage = "A Data Limite é de preenchimento obrigatório")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataLimite { get; set; }
 
         /// <summary>

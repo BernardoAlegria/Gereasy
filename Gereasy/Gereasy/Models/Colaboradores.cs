@@ -43,6 +43,7 @@ namespace Gereasy.Models {
         /// Data de nascimento do Colaborador
         /// </summary>
         [Display(Name = "Data Nascimento")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataNasc { get; set; }
 
         /// <summary>

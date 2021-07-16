@@ -40,23 +40,27 @@ namespace Gereasy.Models {
         /// <summary>
         /// Data de criação do Projeto
         /// </summary>
-        [Required(ErrorMessage = "A Data de Criação é de preenchimento obrigatório")] 
+        [Required(ErrorMessage = "A Data de Criação é de preenchimento obrigatório")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataCriacao { get; set; }
 
         /// <summary>
         /// Data prevista para a conclusão do projeto
         /// </summary>
         [Required(ErrorMessage = "A Data Prevista é de preenchimento obrigatório")] 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataPrevista { get; set; }
 
         /// <summary>
         /// Data de inicio do projeto
         /// </summary>
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataInicio { get; set; }
 
         /// <summary>
         /// Data de conclusão do projeto
         /// </summary>
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataFim { get; set; }
 
         //**************************************

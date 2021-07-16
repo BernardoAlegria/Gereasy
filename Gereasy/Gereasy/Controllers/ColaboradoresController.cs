@@ -26,7 +26,7 @@ namespace Gereasy.Controllers
         private readonly GereasyDbContext _context;
 
         /// <summary>
-        /// Atributo que contém nele os dados do Servidor
+        /// Atributo que contém os dados do Servidor
         /// </summary>
         private readonly IWebHostEnvironment _dadosServidor;
 
