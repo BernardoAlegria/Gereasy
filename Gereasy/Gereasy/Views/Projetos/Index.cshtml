@@ -43,7 +43,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Nome)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Descricao)
@@ -61,10 +61,10 @@
                 @Html.DisplayFor(modelItem => item.DataFim)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Email)
+                <a asp-action="Details" asp-controller="Clientes" asp-route-id="@item.Cliente.Id">@Html.DisplayFor(modelItem => item.Cliente.Nome)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Criador.Cargo)
+                <a asp-action="Details" asp-controller="Colaboradores" asp-route-id="@item.Criador.Id">@Html.DisplayFor(modelItem => item.Criador.Nome)</a>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
