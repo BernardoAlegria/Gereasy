@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -20,19 +20,55 @@
             </div>
             <div class="form-group">
                 <label asp-for="DataNasc" class="control-label"></label>
-                <input asp-for="DataNasc" class="form-control" />
+                @* o ToString permite colocar o "value" do date picker, de forma a que o input tenha a data já preenchida com a atual *@
+                <input asp-for="DataNasc" class="form-control" type="date" value="@Model.DataNasc.ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="DataNasc" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Cargo" class="control-label"></label>
-                <input asp-for="Cargo" class="form-control" />
+                @* <input asp-for="Cargo" class="form-control" /> *@
+
+                @{
+                    @* Ver primeiro qual o cargo atual para estar pré definido na lista *@
+                    string cargo = Model.Cargo;
+                    string pretty = "";
+                    if (cargo == "gestor") pretty = "Gestor";
+                    else pretty = "Técnico";
+                    @* construir o select*@
+                    <select asp-for="Cargo" class="form-control">
+                        @* "Selected" para não ser preciso alterar, "hidden" para não aparecer na lista 2 vezes*@
+                        <option selected hidden value="@cargo">@pretty</option>
+                        <option value="gestor">Gestor</option>
+                        <option value="tecnico">Técnico</option>
+                    </select>
+                }
                 <span asp-validation-for="Cargo" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <label asp-for="Departamento" class="control-label"></label>
-                <input asp-for="Departamento" class="form-control" />
+                @*<input asp-for="Departamento" class="form-control" />*@
+                @{
+                    @* Ver primeiro qual o Departamento atual para estar pré definido na lista *@
+                    string departamento = Model.Departamento;
+                    @* Consoante o departamento, colocar acentuação para ficar mais apresentável
+                        Caso depois existam mais departamentos, fazer antes um switch case *@
+                    if (departamento == "Gestao") pretty = "Gestão";
+                    else pretty = "Informática";
+
+                    @* construir o select*@
+                    <select asp-for="Departamento" class="form-control">
+                        @* "Selected" para não ser preciso alterar, "hidden" para não aparecer na lista 2 vezes*@
+                        <option selected hidden value="@departamento">@pretty</option>
+                        <option value="gestao">Gestão</option>
+                        <option value="informatica">Informática</option>
+                    </select>
+                }
                 <span asp-validation-for="Departamento" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
@@ -44,8 +80,9 @@
                 <span asp-validation-for="Contacto" class="text-danger"></span>
             </div>
             <div class="form-group">
+
                 <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" />
+                <input type="file" name="fotoColaborador" accept=".png,.jpg,.jpeg" style="color:blue;" />
                 <span asp-validation-for="Foto" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -53,6 +90,13 @@
             </div>
         </form>
     </div>
+
+    <div class="col-md-4">
+        <img src="~/fotos/@Model.Foto"
+             title="@Model.Nome"
+             height="100" />
+    </div>
+
 </div>
 
 <div>
