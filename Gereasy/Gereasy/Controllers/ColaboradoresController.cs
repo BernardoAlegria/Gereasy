@@ -193,17 +193,22 @@ namespace Gereasy.Controllers {
                     // !mudafoto é equivalente a: mudaFoto == false. Se for falso, o contrário de falso é verdadeiro e executa a instrução do if
                     if (!mudaFoto) _context.Entry(colaborador).Property(x => x.Foto).IsModified = false;
                     await _context.SaveChangesAsync();
-                    
-                    //apagar a fotografia antiga, caso ainda exista. 
-                    try {
-                        string caminho = Path.Combine(_dadosServidor.WebRootPath, "fotos", nomeAntigo);
-                        // System.IO.File porque só file nao deixa devido a permissões
-                        if (System.IO.File.Exists(caminho)) {
-                            System.IO.File.Delete(caminho);
+
+                    //apagar a fotografia antiga, caso ainda exista E não seja a "default"
+                    if (nomeAntigo != "default.jpg") {
+                        try {
+                            string caminho = Path.Combine(_dadosServidor.WebRootPath, "fotos", nomeAntigo);
+                            // System.IO.File porque só file nao deixa devido a permissões
+                            if (System.IO.File.Exists(caminho)) {
+                                System.IO.File.Delete(caminho);
+                            }
+                        } catch (Exception) {
+                            // Não apagar o ficheiro não é grave, não é necessário avisar o utilizador
+                            // Redirecionar para a página "Details" do Colaborador que foi editado
+                            return RedirectToAction(nameof(Details), new { id = colaborador.Id });
                         }
-                    } catch (Exception) {
-                        // TODO
                     }
+
 
 
 
@@ -240,9 +245,33 @@ namespace Gereasy.Controllers {
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id) {
+
             var colaboradores = await _context.Colaboradores.FindAsync(id);
+            //precisamos do nome da fotografia para apagar o ficheiro apos eliminar o Colaborador da Base de Dados. Se existir!
+            string nomeFoto = "";
+            if (colaboradores.Foto != null) nomeFoto = colaboradores.Foto;
             _context.Colaboradores.Remove(colaboradores);
-            await _context.SaveChangesAsync();
+            try {
+                await _context.SaveChangesAsync();
+                // Se o SaveChangeAsync correu com sucesso, podemos apagar a fotografia se existir e se não for a "default"
+                if(nomeFoto != "" && nomeFoto != "default.jpg") {
+                    try {
+                        string caminho = Path.Combine(_dadosServidor.WebRootPath, "fotos", nomeFoto);
+                        // System.IO.File porque só file nao deixa devido a permissões
+                        if (System.IO.File.Exists(caminho)) {
+                            System.IO.File.Delete(caminho);
+                        }
+                    } catch (Exception) {
+                        // Não apagar o ficheiro não é grave, não é necessário avisar o utilizador
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+
+            } catch(DbUpdateException) {// Erro ao efetuar alterações na base de dados
+                ModelState.AddModelError("", "Ocorreu um erro durante a eliminação do Colaborador.");
+                return View();
+            }
+            
             return RedirectToAction(nameof(Index));
         }
 
