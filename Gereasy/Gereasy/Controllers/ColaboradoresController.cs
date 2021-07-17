@@ -268,6 +268,7 @@ namespace Gereasy.Controllers {
                 }
 
             } catch(DbUpdateException) {// Erro ao efetuar alterações na base de dados
+                //TODO adicionar sitio para a mensagem de erro e view correta
                 ModelState.AddModelError("", "Ocorreu um erro durante a eliminação do Colaborador.");
                 return View();
             }
