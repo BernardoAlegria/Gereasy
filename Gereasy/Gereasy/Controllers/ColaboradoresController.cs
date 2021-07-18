@@ -251,6 +251,9 @@ namespace Gereasy.Controllers {
             string nomeFoto = "";
             if (colaboradores.Foto != null) nomeFoto = colaboradores.Foto;
             _context.Colaboradores.Remove(colaboradores);
+            // Para poder apagar um colaborador, é necessário que os objetos que o referenciam sejam apagados primeiro
+            // devido ao "OnDelete" estar com o valor de "Restrict", para não haver tarefas que não se sabe quem criou
+            // Caso não seja possível, é disparada uma excepcão "DbUpdateException"
             try {
                 await _context.SaveChangesAsync();
                 // Se o SaveChangeAsync correu com sucesso, podemos apagar a fotografia se existir e se não for a "default"
@@ -267,9 +270,12 @@ namespace Gereasy.Controllers {
                     }
                 }
 
-            } catch(DbUpdateException) {// Erro ao efetuar alterações na base de dados
-                //TODO adicionar sitio para a mensagem de erro e view correta
-                ModelState.AddModelError("", "Ocorreu um erro durante a eliminação do Colaborador.");
+            } catch(DbUpdateException e) {
+                // Esta exceção, em principio, ocorre quando não podemos apagar o colaborador devido ao OnDelete estar em Restrict
+                // Para ter a certeza se foi essa a razão, podemos verificar a source do erro.
+                // Dizemos ao utilizador que a operação nao pode ser feita
+                if(e.Source == "Microsoft.EntityFrameworkCore.Relational") ModelState.AddModelError("", "O Colaborador não pode ser eliminado.");
+                else ModelState.AddModelError("", "Ocorreu um erro inesperado durante eliminação do Colaborador.");
                 return View();
             }
             
