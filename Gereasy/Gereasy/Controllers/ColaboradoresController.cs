@@ -276,7 +276,7 @@ namespace Gereasy.Controllers {
                 // Dizemos ao utilizador que a operação nao pode ser feita
                 if(e.Source == "Microsoft.EntityFrameworkCore.Relational") ModelState.AddModelError("", "O Colaborador não pode ser eliminado.");
                 else ModelState.AddModelError("", "Ocorreu um erro inesperado durante eliminação do Colaborador.");
-                return View();
+                return View(colaboradores);
             }
             
             return RedirectToAction(nameof(Index));

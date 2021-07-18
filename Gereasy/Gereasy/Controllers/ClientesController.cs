@@ -142,7 +142,21 @@ namespace Gereasy.Controllers
         {
             var clientes = await _db.Clientes.FindAsync(id);
             _db.Clientes.Remove(clientes);
-            await _db.SaveChangesAsync();
+
+            // Para poder apagar um Cliente, é necessário que os objetos que o referenciam sejam apagados primeiro
+            // devido ao "OnDelete" estar com o valor de "Restrict"
+            // Caso não seja possível, é disparada uma excepcão "DbUpdateException"
+            try {
+                await _db.SaveChangesAsync();
+
+            } catch (DbUpdateException e) {
+                // Esta exceção, em principio, ocorre quando não podemos apagar o cliente devido ao OnDelete estar em Restrict
+                // Para ter a certeza se foi essa a razão, podemos verificar a source do erro.
+                // Dizemos ao utilizador que a operação nao pode ser feita
+                if (e.Source == "Microsoft.EntityFrameworkCore.Relational") ModelState.AddModelError("", "O Cliente não pode ser eliminado.");
+                else ModelState.AddModelError("", "Ocorreu um erro inesperado durante eliminação do Cliente.");
+                return View(clientes);
+            }
             return RedirectToAction(nameof(Index));
         }
 
