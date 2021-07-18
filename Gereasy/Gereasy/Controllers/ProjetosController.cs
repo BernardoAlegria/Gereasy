@@ -49,8 +49,8 @@ namespace Gereasy.Controllers
         // GET: Projetos/Create
         public IActionResult Create()
         {
-            ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email");
-            ViewData["CriadorFK"] = new SelectList(_context.Colaboradores, "Id", "Cargo");
+            ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Nome");
+            ViewData["CriadorFK"] = new SelectList(_context.Colaboradores, "Id", "Nome");
             return View();
         }
 
@@ -85,8 +85,8 @@ namespace Gereasy.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email", projetos.ClienteFK);
-            ViewData["CriadorFK"] = new SelectList(_context.Colaboradores, "Id", "Cargo", projetos.CriadorFK);
+            ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Nome", projetos.ClienteFK);
+            ViewData["CriadorFK"] = new SelectList(_context.Colaboradores, "Id", "Nome", projetos.CriadorFK);
             return View(projetos);
         }
 

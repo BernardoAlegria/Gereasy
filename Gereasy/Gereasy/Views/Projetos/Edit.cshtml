@@ -6,7 +6,7 @@
 
 <h1>Editar</h1>
 
-<h4>Projetos</h4>
+<h4>Projeto</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -20,27 +20,28 @@
             </div>
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
+                <textarea asp-for="Descricao" class="form-control"></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataCriacao" class="control-label"></label>
-                <input asp-for="DataCriacao" class="form-control" />
+                @* o ToString permite colocar o "value" do date picker, de forma a que o input tenha a data já preenchida com a atual *@
+                <input asp-for="DataCriacao" class="form-control" type="date" value="@Model.DataCriacao.ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="DataCriacao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataPrevista" class="control-label"></label>
-                <input asp-for="DataPrevista" class="form-control" />
+                <input asp-for="DataPrevista" class="form-control" type="date" value="@Model.DataPrevista.ToString("yyyy-MM-dd")"/>
                 <span asp-validation-for="DataPrevista" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataInicio" class="control-label"></label>
-                <input asp-for="DataInicio" class="form-control" />
+                <input asp-for="DataInicio" class="form-control" type="date" value="@Model.DataInicio.ToString("yyyy-MM-dd")"/>
                 <span asp-validation-for="DataInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataFim" class="control-label"></label>
-                <input asp-for="DataFim" class="form-control" />
+                <input asp-for="DataFim" class="form-control" type="date" value="@Model.DataFim.ToString("yyyy-MM-dd")"/>
                 <span asp-validation-for="DataFim" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -54,7 +55,7 @@
                 <span asp-validation-for="CriadorFK" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>

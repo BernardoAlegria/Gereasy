@@ -69,6 +69,7 @@ namespace Gereasy.Models {
         /// FK para o Cliente ao qual este projeto corresponde
         /// </summary>
         [ForeignKey(nameof(Cliente))]
+        [Required(ErrorMessage = "O Cliente é de preenchimento obrigatório")]
         public int ClienteFK { get; set; }
         public Clientes Cliente { get; set; }
 
@@ -76,6 +77,7 @@ namespace Gereasy.Models {
         /// FK para o Colaborador que criou este projeto
         /// </summary>
         [ForeignKey(nameof(Criador))]
+        [Required(ErrorMessage = "O Criador é de preenchimento obrigatório")]
         public int CriadorFK { get; set; }
         public Colaboradores Criador { get; set; }
 

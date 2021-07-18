@@ -6,7 +6,7 @@
 
 <h1>Adicionar</h1>
 
-<h4>Projetos</h4>
+<h4>Projeto</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,39 +19,45 @@
             </div>
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
+                <textarea asp-for="Descricao" class="form-control"></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataCriacao" class="control-label"></label>
-                <input asp-for="DataCriacao" class="form-control" />
+                <input asp-for="DataCriacao" class="form-control" type="date" />
                 <span asp-validation-for="DataCriacao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataPrevista" class="control-label"></label>
-                <input asp-for="DataPrevista" class="form-control" />
+                <input asp-for="DataPrevista" class="form-control" type="date" />
                 <span asp-validation-for="DataPrevista" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataInicio" class="control-label"></label>
-                <input asp-for="DataInicio" class="form-control" />
+                <input asp-for="DataInicio" class="form-control" type="date"/>
                 <span asp-validation-for="DataInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataFim" class="control-label"></label>
-                <input asp-for="DataFim" class="form-control" />
+                <input asp-for="DataFim" class="form-control" type="date" />
                 <span asp-validation-for="DataFim" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ClienteFK" class="control-label"></label>
-                <select asp-for="ClienteFK" class ="form-control" asp-items="ViewBag.ClienteFK"></select>
+                <select asp-for="ClienteFK" class="form-control" asp-items="ViewBag.ClienteFK">
+                    <option selected disabled hidden>Selecione o Cliente</option>
+                </select>
+                <span asp-validation-for="ClienteFK" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CriadorFK" class="control-label"></label>
-                <select asp-for="CriadorFK" class ="form-control" asp-items="ViewBag.CriadorFK"></select>
+                <select asp-for="CriadorFK" class="form-control" asp-items="ViewBag.CriadorFK">
+                    <option selected disabled hidden>Selecione o Criador</option>
+                </select>
+                <span asp-validation-for="CriadorFK" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
