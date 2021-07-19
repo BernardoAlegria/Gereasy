@@ -158,9 +158,27 @@ namespace Gereasy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tarefas = await _context.Tarefas.FindAsync(id);
+            // É preciso os includes para, caso não seja possível apagar, reenviar a informação do criador e do cliente correspondentes
+            // a este projeto
+            var tarefas = await _context.Tarefas
+                .Include(t => t.Projeto)
+                .FirstOrDefaultAsync(t => t.Id == id);
             _context.Tarefas.Remove(tarefas);
-            await _context.SaveChangesAsync();
+            // Para poder apagar um colaborador, é necessário que os objetos que o referenciam sejam apagados primeiro
+            // devido ao "OnDelete" estar com o valor de "Restrict", para não haver tarefas que não se sabe quem criou
+            // Caso não seja possível, é disparada uma excepcão "DbUpdateException"
+            try {
+                await _context.SaveChangesAsync();
+            } catch (DbUpdateException e) {
+                // Esta exceção, em principio, ocorre quando não podemos apagar a tarefa devido ao OnDelete estar em Restrict
+                // Para ter a certeza se foi essa a razão, podemos verificar a source do erro.
+                // Dizemos ao utilizador que a operação nao pode ser feita
+                // TODO: Neste caso talvez faça sentido deixar apagar a tarefa, tendo de apagar todos os registos de atividade
+                // (tabela TarefasColaboradores) primeiro.
+                if (e.Source == "Microsoft.EntityFrameworkCore.Relational") ModelState.AddModelError("", "A Tarefa não pode ser eliminada.");
+                else ModelState.AddModelError("", "Ocorreu um erro inesperado durante eliminação da Tarefa.");
+                return View(tarefas);
+            }
             return RedirectToAction(nameof(Index));
         }
 

@@ -171,7 +171,7 @@ namespace Gereasy.Controllers
                 // a este projeto
                 .Include(p => p.Cliente)
                 .Include(p => p.Criador)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(p => p.Id == id);
             _context.Projetos.Remove(projetos);
             // Para poder apagar um Projeto, é necessário que os objetos que o referenciam sejam apagados primeiro
             // devido ao "OnDelete" estar com o valor de "Restrict", para não haver tarefas que não se sabe quem criou
