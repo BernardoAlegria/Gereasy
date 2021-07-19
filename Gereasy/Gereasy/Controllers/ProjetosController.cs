@@ -63,8 +63,15 @@ namespace Gereasy.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(projetos);
-                await _context.SaveChangesAsync();
+                // O SaveChanges pode lançar exceções de houver problemas em guardar a informação na base de dados
+                try {
+                    _context.Add(projetos);
+                    await _context.SaveChangesAsync();
+
+                } catch(Exception) {
+                    ModelState.AddModelError("", "Ocorreu um erro durante a criação do Projeto.");
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email", projetos.ClienteFK);
@@ -104,6 +111,7 @@ namespace Gereasy.Controllers
 
             if (ModelState.IsValid)
             {
+                
                 try
                 {
                     _context.Update(projetos);
@@ -119,6 +127,10 @@ namespace Gereasy.Controllers
                     {
                         throw;
                     }
+                // Pode haver outros problemas não relacionados com a concorrência. Por ex, perda de ligação à BD
+                } catch (DbUpdateException) {
+                    ModelState.AddModelError("", "Ocorreu um erro durante a criação do Projeto.");
+                    return View();
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -152,9 +164,27 @@ namespace Gereasy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var projetos = await _context.Projetos.FindAsync(id);
+            var projetos = await _context.Projetos
+                // É preciso os includes para, caso não seja possível apagar, reenviar a informação do criador e do cliente correspondentes
+                // a este projeto
+                .Include(p => p.Cliente)
+                .Include(p => p.Criador)
+                .FirstOrDefaultAsync(m => m.Id == id);
             _context.Projetos.Remove(projetos);
-            await _context.SaveChangesAsync();
+            // Para poder apagar um Projeto, é necessário que os objetos que o referenciam sejam apagados primeiro
+            // devido ao "OnDelete" estar com o valor de "Restrict", para não haver tarefas que não se sabe quem criou
+            // Caso não seja possível, é disparada uma excepcão "DbUpdateException"
+            try {
+                await _context.SaveChangesAsync();
+               
+            } catch(DbUpdateException e) {
+                // Esta exceção, em principio, ocorre quando não podemos apagar o colaborador devido ao OnDelete estar em Restrict
+                // Para ter a certeza se foi essa a razão, podemos verificar a source do erro.
+                // Dizemos ao utilizador que a operação nao pode ser feita
+                if (e.Source == "Microsoft.EntityFrameworkCore.Relational") ModelState.AddModelError("", "O Projeto não pode ser eliminado.");
+                else ModelState.AddModelError("", "Ocorreu um erro inesperado durante eliminação do Projeto.");
+                return View(projetos);
+            }
             return RedirectToAction(nameof(Index));
         }
 
