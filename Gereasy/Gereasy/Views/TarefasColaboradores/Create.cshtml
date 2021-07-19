@@ -6,7 +6,7 @@
 
 <h1>Adicionar</h1>
 
-<h4>TarefasColaboradores</h4>
+<h4>Registo de Atividade</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,31 +14,46 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Funcao" class="control-label"></label>
-                <input asp-for="Funcao" class="form-control" />
+                <select asp-for="Funcao" class="form-control">
+                    @* Os parâmetros "selected disabled hidden" permitem ter um select com as seguintes características:
+                      Possui uma opção pré-preenchida, que serve como mensagem para o utilizador escolher uma opção;
+                      Esta opção não pode ser escolhida após o utilizador selecionar uma das opções;
+                       Esta opção não tem valor, como tal, caso o utilzador não selecione nenhuma dá erro
+                    *@
+                    <option selected disabled hidden>Selecione uma Função</option>
+                    <option value="implementador">implementador</option>
+                    <option value="revisor">revisor</option>
+                </select>
                 <span asp-validation-for="Funcao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TempoDedicado" class="control-label"></label>
-                <input asp-for="TempoDedicado" class="form-control" />
-                <span asp-validation-for="TempoDedicado" class="text-danger"></span>
+                <label asp-for="TempoDedicadoTimeSpan" class="control-label"></label>
+                <input asp-for="TempoDedicadoTimeSpan" class="form-control" type="time" />
+                <span asp-validation-for="TempoDedicadoTimeSpan" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ColaboradorFK" class="control-label"></label>
-                <select asp-for="ColaboradorFK" class ="form-control" asp-items="ViewBag.ColaboradorFK"></select>
+                <select asp-for="ColaboradorFK" class="form-control" asp-items="ViewBag.ColaboradorFK">
+                    <option selected disabled hidden>Selecione o Colaborador</option>
+                </select>
+                <span asp-validation-for="ColaboradorFK" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TarefaFK" class="control-label"></label>
-                <select asp-for="TarefaFK" class ="form-control" asp-items="ViewBag.TarefaFK"></select>
+                <select asp-for="TarefaFK" class="form-control" asp-items="ViewBag.TarefaFK">
+                    <option selected disabled hidden>Selecione o Colaborador</option>
+                </select>
+                <span asp-validation-for="ColaboradorFK" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Voltar Atrás</a>
+    <a asp-action="Index">Índice</a>
 </div>
 
 @section Scripts {

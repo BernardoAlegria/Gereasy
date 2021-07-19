@@ -22,7 +22,7 @@ namespace Gereasy.Controllers
         // GET: TarefasColaboradores
         public async Task<IActionResult> Index()
         {
-            var gereasyDbContext = _context.TarefasColaboradores.Include(t => t.Colaborador).Include(t => t.Tarefa);
+            var gereasyDbContext = _context.TarefasColaboradores.Include(t => t.Colaborador).Include(t => t.Tarefa).Include(t => t.Tarefa.Projeto);
             return View(await gereasyDbContext.ToListAsync());
         }
 
@@ -49,8 +49,8 @@ namespace Gereasy.Controllers
         // GET: TarefasColaboradores/Create
         public IActionResult Create()
         {
-            ViewData["ColaboradorFK"] = new SelectList(_context.Colaboradores, "Id", "Cargo");
-            ViewData["TarefaFK"] = new SelectList(_context.Tarefas, "Id", "Prioridade");
+            ViewData["ColaboradorFK"] = new SelectList(_context.Colaboradores, "Id", "Nome");
+            ViewData["TarefaFK"] = new SelectList(_context.Tarefas, "Id", "Titulo");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace Gereasy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Funcao,TempoDedicado,ColaboradorFK,TarefaFK")] TarefasColaboradores tarefasColaboradores)
+        public async Task<IActionResult> Create([Bind("Id,Funcao,TempoDedicadoTimeSpan,ColaboradorFK,TarefaFK")] TarefasColaboradores tarefasColaboradores)
         {
             if (ModelState.IsValid)
             {
@@ -85,8 +85,8 @@ namespace Gereasy.Controllers
             {
                 return NotFound();
             }
-            ViewData["ColaboradorFK"] = new SelectList(_context.Colaboradores, "Id", "Cargo", tarefasColaboradores.ColaboradorFK);
-            ViewData["TarefaFK"] = new SelectList(_context.Tarefas, "Id", "Prioridade", tarefasColaboradores.TarefaFK);
+            ViewData["ColaboradorFK"] = new SelectList(_context.Colaboradores, "Id", "Nome", tarefasColaboradores.ColaboradorFK);
+            ViewData["TarefaFK"] = new SelectList(_context.Tarefas, "Id", "Titulo", tarefasColaboradores.TarefaFK);
             return View(tarefasColaboradores);
         }
 
@@ -95,7 +95,7 @@ namespace Gereasy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Funcao,TempoDedicado,ColaboradorFK,TarefaFK")] TarefasColaboradores tarefasColaboradores)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Funcao,TempoDedicadoTimeSpan,ColaboradorFK,TarefaFK")] TarefasColaboradores tarefasColaboradores)
         {
             if (id != tarefasColaboradores.Id)
             {

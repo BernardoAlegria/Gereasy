@@ -30,7 +30,8 @@ namespace Gereasy.Models {
         public string Funcao { get; set; }
 
         /// <summary>
-        /// Quantidade de tempo despendido pelo colaborador a esta tarefa.
+        /// Apenas para a base de dados, para operações utilizar o atributo "TempoDedicadoTimeSpan"
+        /// Quantidade de tempo despendido pelo colaborador a esta tarefa. 
         /// Tem de ser long para guardar o tempo em "ticks". Se não for feito, não é possível mais do que 24h por tarefa.
         /// </summary>
         public long TempoDedicado { get; set; }

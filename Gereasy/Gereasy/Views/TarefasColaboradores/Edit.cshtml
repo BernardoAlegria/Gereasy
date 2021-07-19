@@ -19,9 +19,10 @@
                 <span asp-validation-for="Funcao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TempoDedicado" class="control-label"></label>
-                <input asp-for="TempoDedicado" class="form-control" />
-                <span asp-validation-for="TempoDedicado" class="text-danger"></span>
+                <label asp-for="TempoDedicadoTimeSpan" class="control-label"></label>
+                @*<input asp-for="TempoDedicadoTimeSpan" class="form-control" type="time" value="@Model.TempoDedicadoTimeSpan.Hours:@Model.TempoDedicadoTimeSpan.Minutes" />*@
+            <input asp-for="TempoDedicadoTimeSpan" class="form-control" type="time" value="3:30" />
+                <span asp-validation-for="TempoDedicadoTimeSpan" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ColaboradorFK" class="control-label"></label>
@@ -34,7 +35,7 @@
                 <span asp-validation-for="TarefaFK" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>

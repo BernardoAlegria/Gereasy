@@ -7,36 +7,37 @@
 <h1>Detalhes</h1>
 
 <div>
-    <h4>TarefasColaboradores</h4>
+    <h4>Registo de Atividade</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Funcao)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Funcao)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TempoDedicado)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TempoDedicado)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TempoDedicadoTimeSpan)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Colaborador)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Colaborador.Cargo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarefa)
+        <dd class="col-sm-10">
+            <a asp-action="Details" asp-controller="Colaboradores" asp-route-id="@Model.Colaborador.Id">@Html.DisplayFor(modelItem => Model.Colaborador.Nome)</a>
+        </dd>   
+        <dt class="col-sm-2">
+            @*@Html.DisplayNameFor(model => model.Tarefa.Titulo)*@
+            Tarefa
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tarefa.Prioridade)
+        <dd class="col-sm-10">
+            <a asp-action="Details" asp-controller="Tarefas" asp-route-id="@Model.Tarefa.Id">@Html.DisplayFor(modelItem => Model.Tarefa.Titulo)</a>
         </dd>
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
-    <a asp-action="Index">Voltar Atrás</a>
+    <a asp-action="Index">Índice</a>
 </div>

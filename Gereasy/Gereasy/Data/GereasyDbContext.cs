@@ -90,9 +90,9 @@ namespace Gereasy.Data {
                 new TarefasColaboradores { Id = 2, Funcao = "revisor", TempoDedicadoTimeSpan = new TimeSpan(0, 0, 0, 0), ColaboradorFK = 1, TarefaFK = 1 },
                 new TarefasColaboradores { Id = 3, Funcao = "implementador", TempoDedicadoTimeSpan = new TimeSpan(1, 8, 0, 0), ColaboradorFK = 5, TarefaFK = 2 },
                 new TarefasColaboradores { Id = 4, Funcao = "revisor", TempoDedicadoTimeSpan = new TimeSpan(0, 0, 0, 0), ColaboradorFK = 6, TarefaFK = 2 },
-                new TarefasColaboradores { Id = 5, Funcao = "implementador", TempoDedicadoTimeSpan = new TimeSpan(1, 0, 0, 0), ColaboradorFK = 5, TarefaFK = 3 },
-                new TarefasColaboradores { Id = 6, Funcao = "implementador", TempoDedicadoTimeSpan = new TimeSpan(0, 8, 0, 0), ColaboradorFK = 6, TarefaFK = 3 },
-                new TarefasColaboradores { Id = 7, Funcao = "revisor", TempoDedicadoTimeSpan = new TimeSpan(0, 0, 0, 0), ColaboradorFK = 1, TarefaFK = 3 }
+                new TarefasColaboradores { Id = 5, Funcao = "implementador", TempoDedicadoTimeSpan = new TimeSpan(1, 0, 0, 0), ColaboradorFK = 5, TarefaFK = 4 },
+                new TarefasColaboradores { Id = 6, Funcao = "implementador", TempoDedicadoTimeSpan = new TimeSpan(0, 8, 0, 0), ColaboradorFK = 6, TarefaFK = 4 },
+                new TarefasColaboradores { Id = 7, Funcao = "revisor", TempoDedicadoTimeSpan = new TimeSpan(0, 0, 0, 0), ColaboradorFK = 1, TarefaFK = 4 }
                 );
 
         }
