@@ -125,14 +125,16 @@ namespace Gereasy.Controllers
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("", "Ocorreu um erro");
+                        return View();
                     }
                 // Pode haver outros problemas não relacionados com a concorrência. Por ex, perda de ligação à BD
                 } catch (DbUpdateException) {
                     ModelState.AddModelError("", "Ocorreu um erro durante a criação do Projeto.");
                     return View();
                 }
-                return RedirectToAction(nameof(Index));
+                // Redirecionar para a página "Details" do Projeto que foi editado
+                return RedirectToAction(nameof(Details), new { id = projetos.Id });
             }
             ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email", projetos.ClienteFK);
             ViewData["CriadorFK"] = new SelectList(_context.Colaboradores, "Id", "Cargo", projetos.CriadorFK);

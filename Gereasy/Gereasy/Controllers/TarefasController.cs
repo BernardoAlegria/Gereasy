@@ -91,6 +91,7 @@ namespace Gereasy.Controllers
                 return NotFound();
             }
             ViewData["ProjetoFK"] = new SelectList(_context.Projetos, "Id", "Nome", tarefas.ProjetoFK);
+            ViewData["ColaboradorFK"] = new SelectList(_context.Colaboradores, "Id", "Nome", tarefas.ColaboradorFK);
             return View(tarefas);
         }
 
@@ -99,7 +100,7 @@ namespace Gereasy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Descricao,DataCriacao,DataLimite,Estado,Prioridade,TempoDedicadoTotal,ProjetoFK")] Tarefas tarefas)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Descricao,DataCriacao,DataLimite,Estado,Prioridade,TempoDedicadoTotal,ProjetoFK,ColaboradorFK")] Tarefas tarefas)
         {
             if (id != tarefas.Id)
             {
@@ -121,12 +122,15 @@ namespace Gereasy.Controllers
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("", "Ocorreu um erro");
+                        return View();
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                // Redirecionar para a página "Details" do Colaborador que foi editado
+                return RedirectToAction(nameof(Details), new { id = tarefas.Id });
             }
             ViewData["ProjetoFK"] = new SelectList(_context.Projetos, "Id", "Nome", tarefas.ProjetoFK);
+            ViewData["ColaboradorFK"] = new SelectList(_context.Colaboradores, "Id", "Nome", tarefas.ColaboradorFK);
             return View(tarefas);
         }
 
