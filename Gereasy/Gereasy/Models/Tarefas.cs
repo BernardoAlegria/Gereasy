@@ -86,6 +86,7 @@ namespace Gereasy.Models {
         /// FK para o Projecto ao qual a Tarefa pertence
         /// </summary>
         [ForeignKey(nameof(Projeto))]
+        [Required(ErrorMessage = "O Projeto é de preenchimento obrigatório")]
         public int? ProjetoFK { get; set; }
         public Projetos Projeto { get; set; }
 
@@ -93,6 +94,7 @@ namespace Gereasy.Models {
         /// FK para o Colaborador que criou a tarefa
         /// </summary>
         [ForeignKey(nameof(Colaborador))]
+        [Required(ErrorMessage = "O Colaborador é de preenchimento obrigatório")]
         public int ColaboradorFK { get; set; }
         public Colaboradores Colaborador { get; set; }
 

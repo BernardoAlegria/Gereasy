@@ -49,6 +49,7 @@ namespace Gereasy.Controllers
         public IActionResult Create()
         {
             ViewData["ProjetoFK"] = new SelectList(_context.Projetos, "Id", "Nome");
+            ViewData["ColaboradorFK"] = new SelectList(_context.Colaboradores, "Id", "Nome");
             return View();
         }
 
@@ -57,12 +58,19 @@ namespace Gereasy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,Descricao,DataCriacao,DataLimite,Estado,Prioridade,TempoDedicadoTotal,ProjetoFK")] Tarefas tarefas)
+        public async Task<IActionResult> Create([Bind("Id,Titulo,Descricao,DataCriacao,DataLimite,Estado,Prioridade,TempoDedicadoTotal,ProjetoFK,ColaboradorFK")] Tarefas tarefas)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tarefas);
-                await _context.SaveChangesAsync();
+                //Criar a informação na base de dados pode correr mal e gerar excepções.
+                try {
+                    _context.Add(tarefas);
+                    await _context.SaveChangesAsync();
+                } catch (DbUpdateException) {
+                    ModelState.AddModelError("", "Ocorreu um erro durante a criação da Tarefa.");
+                    return View();
+                }
+                
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjetoFK"] = new SelectList(_context.Projetos, "Id", "Nome", tarefas.ProjetoFK);
